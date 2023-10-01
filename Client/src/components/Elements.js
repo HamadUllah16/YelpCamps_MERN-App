@@ -7,7 +7,7 @@ function Elements(){
     const [data, setData] = useState([])
     const [spinner, setSpinner] = useState(true)
     async function fetchAPI() {
-      await fetch('http://localhost:2000/').then(response => response.json()).then((data)=>
+      await fetch('https://yelp-camps-mern-app-server.vercel.app/').then(response => response.json()).then((data)=>
       setData(data)
       ).catch(e => console.log(`${e} FetchAPI Error`))
       setSpinner(false)

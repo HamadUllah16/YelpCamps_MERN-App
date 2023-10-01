@@ -11,7 +11,7 @@ const PORT = process.env.PORT | 2000
 app.set("view engine","ejs");
 app.use(express.static('public'));
 app.use(methodOverride("_method"));
-app.use(cors({origin: process.env.ORIGIN,methods: ["POST", "GET"] ,credentials: true}))
+app.use(cors({origin: ["https://yelp-camps-mern-app-server.vercel.app"],methods: ["POST", "GET"] ,credentials: true}))
 app.use(express.json())
 
 app.use(express.urlencoded({extended: false}))
