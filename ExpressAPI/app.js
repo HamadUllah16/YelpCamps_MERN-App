@@ -7,10 +7,11 @@ const cors = require('cors')
 
 //------------------- * Middleware * -----------------
 
+const PORT = process.env.PORT | 2000
 app.set("view engine","ejs");
 app.use(express.static('public'));
 app.use(methodOverride("_method"));
-app.use(cors({origin: true, credentials: true}))
+app.use(cors({origin: process.env.ORIGIN,methods: ["POST", "GET"] ,credentials: true}))
 app.use(express.json())
 
 app.use(express.urlencoded({extended: false}))
@@ -63,9 +64,17 @@ app.get('/delete/:id', (req,res)=>{
     res.status(200).json({message: 'Deleted'})
 })
 
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('client/build'));
+    const path = require('path');
+    app.get('*', (req,res)=>{
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+}
+
  //Server
-app.listen(2000,function(){
-    console.log("Server is running on port: 2000");
+app.listen(PORT,function(){
+    console.log(`Server is running on port: ${PORT}`);
 });
 
 //module.exports = app;
