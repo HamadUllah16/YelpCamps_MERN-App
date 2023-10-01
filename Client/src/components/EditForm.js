@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-function EditForm() {
+function EditForm({api}) {
   const { id } = useParams()
   const [data, setData] = useState([])
   useEffect(() => {
-    fetch(`http://localhost:2000/edit/${id}`).then((response) => response.json()).then((item) => setData(item)).catch(e => console.log(e, 'Error in fetching Edit Data'))
-  }, [id])
+    fetch(`${api}edit/${id}`).then((response) => response.json()).then((item) => setData(item)).catch(e => console.log(e, 'Error in fetching Edit Data'))
+  })
 
   async function submitHandler(e) {
     try {
-      const response = await fetch(`http://localhost:2000/edit/${id}`, {
+      const response = await fetch(`${api}edit/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

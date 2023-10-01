@@ -5,12 +5,13 @@ import Add from '../pages/Add'
 import Edit from '../pages/Edit'
 
 function AppRoutes() {
+  const api = "https://yelp-camps-mern-app-server.vercel.app/"
   return (
     <div>
         <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/add' element={<Add />} />
-            <Route path='/edit/:id' element={<Edit />}/>
+            <Route path='/' element={<Home api={api} />} />
+            <Route path='/add' element={<Add api={api} />} />
+            <Route path='/edit/:id' element={<Edit api={api} />}/>
         </Routes>
     </div>
   )

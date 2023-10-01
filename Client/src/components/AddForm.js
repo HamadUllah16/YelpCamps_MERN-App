@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function AddForm() {
+function AddForm({api}) {
   const [name, setName] = useState()
   const [image, setImage] = useState()
   const [desc, setDesc] = useState()
@@ -8,7 +8,7 @@ function AddForm() {
 
   async function submitHandler(e) {
     try {
-      const response = await fetch('http://localhost:2000/add', {
+      const response = await fetch(`https://yelp-camps-mern-app-server.vercel.app/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json', // Adjust the content type if needed

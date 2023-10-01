@@ -3,19 +3,18 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-function Elements(){
+function Elements({api}){
     const [data, setData] = useState([])
     const [spinner, setSpinner] = useState(true)
     async function fetchAPI() {
-      await fetch('https://yelp-camps-mern-app-server.vercel.app/').then(response => response.json()).then((data)=>
+      await fetch(`${api}`).then(response => response.json()).then((data)=>
       setData(data)
       ).catch(e => console.log(`${e} FetchAPI Error`))
       setSpinner(false)
     }
-  
     useEffect(() => {
       fetchAPI()
-    }, [])
+    })
     const renderCards = data.map((item) => {
         return (
             <div className="col-2 m-2 card cardSize p-0">
@@ -32,12 +31,12 @@ function Elements(){
         )
     })
     const deleteOne = (id)=>{
-        fetch(`http://localhost:2000/delete/${id}`)
+        fetch(`${api}delete/${id}`)
         window.location.reload()
     }
     async function deleteHandler() {
         try {
-            await fetch('http://localhost:2000/deleteAll')
+            await fetch(`${api}deleteAll'`)
         }
         catch (err) {
             console.log(err)

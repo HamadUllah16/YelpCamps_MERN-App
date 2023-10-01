@@ -11,7 +11,7 @@ const PORT = process.env.PORT | 2000
 app.set("view engine","ejs");
 app.use(express.static('public'));
 app.use(methodOverride("_method"));
-app.use(cors({origin: ["http://localhost:3000"],methods: ["POST", "GET"] ,credentials: true}))
+app.use(cors({origin: ["http://localhost:3000","http://localhost:3000/add"],methods: ["POST", "GET"] ,credentials: true}))
 app.use(express.json())
 
 app.use(express.urlencoded({extended: false}))
