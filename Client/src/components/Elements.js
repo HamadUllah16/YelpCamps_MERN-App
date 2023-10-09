@@ -3,40 +3,40 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-function Elements({api}){
+function Elements({ server }) {
     const [data, setData] = useState([])
     const [spinner, setSpinner] = useState(true)
     async function fetchAPI() {
-      await fetch(`${api}`).then(response => response.json()).then((data)=>
-      setData(data)
-      ).catch(e => console.log(`${e} FetchAPI Error`))
-      setSpinner(false)
+        await fetch(`${server}`).then(response => response.json()).then((data) =>
+            setData(data)
+        ).catch(e => console.log(`${e} FetchAPI Error`))
+        setSpinner(false)
     }
     useEffect(() => {
-      fetchAPI()
+        fetchAPI()
     })
-    const renderCards = data.map((item) => {
+    const renderCards = data.map((item,index) => {
         return (
-            <div className="col-2 m-2 card cardSize p-0">
+            <div key={index} className="col-2 m-2 card cardSize p-0">
                 <img src={item.image} className="img-fluid cardImage rounded" alt="..." />
                 <div className='card-body'>
-                    <h5 class="card-title">{item.name}</h5>
-                    <p class="card-text">{item.description}</p>
+                    <h5 className="card-title">{item.name}</h5>
+                    <p className="card-text">{item.description}</p>
                     <Link to={`/edit/${item._id}`}>
                         <button className='btn btn-primary me-1' value={item._id}>Edit</button>
                     </Link>
-                    <button className='btn btn-danger me-1' value={item._id} onClick={(e)=>deleteOne(item._id)}>Delete</button>
+                    <button className='btn btn-danger me-1' value={item._id} onClick={(e) => deleteOne(item._id)}>Delete</button>
                 </div>
             </div>
         )
     })
-    const deleteOne = (id)=>{
-        fetch(`${api}delete/${id}`)
+    const deleteOne = (id) => {
+        fetch(`${server}delete/${id}`)
         window.location.reload()
     }
     async function deleteHandler() {
         try {
-            await fetch(`${api}deleteAll'`)
+            await fetch(`${server}deleteAll`)
         }
         catch (err) {
             console.log(err)
@@ -49,10 +49,11 @@ function Elements({api}){
                 <button className='btn btn-dark my-3' type='button'>Add</button>
             </Link>
             <button onClick={deleteHandler} className='btn btn-danger my-3 mx-2'>Delete All</button>
-            <div className="row">
+            <div className="row mb-5 pb -5">
                 {spinner ? <FontAwesomeIcon icon={faSpinner} spinPulse /> : renderCards}
             </div>
         </section>
+
     )
 }
 

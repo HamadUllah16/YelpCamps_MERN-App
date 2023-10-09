@@ -3,12 +3,11 @@ import Nav from '../components/Nav'
 import Elements from '../components/Elements'
 import Footer from '../components/Footer'
 
-function Home({data}) {
-    const api = "https://yelp-camps-mern-app-server.vercel.app/"
+function Home({server}) {
     return (
         <>
             <Nav />
-            <Elements api={api} data={data} />
+            <Elements server={server} />
             <Footer />
         </>
     )

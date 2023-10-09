@@ -1,37 +1,31 @@
 import React, { useState } from 'react'
 
-function AddForm({api}) {
+function AddForm({ server }) {
   const [name, setName] = useState()
   const [image, setImage] = useState()
   const [desc, setDesc] = useState()
   const [formData, setFormData] = useState({ name: '', image: '', description: '' })
 
-  async function submitHandler(e) {
-    try {
-      const response = await fetch(`https://yelp-camps-mern-app-server.vercel.app/add`, {
-        method: 'POST',
+  const submitHandler = async (e) => {
+    fetch(`${server}add`,
+      {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json', // Adjust the content type if needed
-        }, body: JSON.stringify(formData)
-      })
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log('Response from backend', responseData)
-      }
-      else {
-        console.log('Error', response.statusText)
-      }
-    }
-    catch (err) {
-      console.log('Error', err)
-    }
-
+          'Content-Type': "application/json"
+        },
+        body: JSON.stringify(formData)
+      }).then(newData => { console.log("Data Added", newData) }).catch(e => { console.log(`${e} Error in New Data`) })
+    setFormData('')
+    setName('')
+    setDesc('')
+    setImage('')
+    e.preventDefault();
   }
   return (
     <div className='m-5 form bg-dark text-light rounded'>
-      <form action='/' className='p-3' onSubmit={submitHandler} >
+      <form action='/' className='p-3 formHeight' onSubmit={submitHandler}>
         <div className="mb-3">
-          <label for="name" className="form-label">Name</label>
+          <label htmlFor="name" className="form-label">Name</label>
           <input value={name} onChange={(e) => {
             setName(e.target.value)
             setFormData({ ...formData, name: e.target.value })
@@ -39,7 +33,7 @@ function AddForm({api}) {
             type="text" className="form-control" name='name' id="name" />
         </div>
         <div className="mb-3">
-          <label for="image" className="form-label">Image</label>
+          <label htmlFor="image" className="form-label">Image</label>
           <input value={image} onChange={(e => {
             setImage(e.target.value)
             setFormData({ ...formData, image: e.target.value })
@@ -47,15 +41,14 @@ function AddForm({api}) {
             type="text" className="form-control" name='image' id="image" />
         </div>
         <div className="mb-3">
-          <label for="desc" className="form-label">Description</label>
+          <label htmlFor="desc" className="form-label">Description</label>
           <input value={desc} onChange={(e => {
             setDesc(e.target.value)
             setFormData({ ...formData, description: e.target.value })
           })}
             type="text" className="form-control" name='desc' id="desc" />
         </div>
-        <button type="submit" className="btn btn-primary" value='OK' onClick={() => {
-        }}>Submit</button>
+        <button type="submit" className="btn btn-primary" value='OK'>Submit</button>
       </form>
     </div>
   )

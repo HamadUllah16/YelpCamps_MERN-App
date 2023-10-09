@@ -3,11 +3,11 @@ import Nav from '../components/Nav'
 import AddForm from '../components/AddForm'
 import Footer from '../components/Footer'
 
-function Add() {
+function Add({server}) {
     return (
         <>
             <Nav />
-            <AddForm />
+            <AddForm server={server} />
             <Footer />
         </>
     )
