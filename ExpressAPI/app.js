@@ -7,7 +7,7 @@ const cors = require('cors')
 //------------------- * Middleware * -----------------
 
 const PORT = process.env.PORT | 2000
-app.use(cors({origin: ["http://localhost:3000","https://yelp-camps-server-8c727j5v8-hamadullah16.vercel.app"],methods: ["POST", "GET"] ,credentials: true}))
+app.use(cors({origin: ["http://localhost:3000","https://yelpcamps-client.vercel.app"],methods: ["POST", "GET"] ,credentials: true}))
 app.use(express.json())
 
 app.use(express.urlencoded({extended: false}))
