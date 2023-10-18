@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const methodOverride = require("method-override");
 const cors = require('cors')
 
 
@@ -8,10 +7,7 @@ const cors = require('cors')
 //------------------- * Middleware * -----------------
 
 const PORT = process.env.PORT | 2000
-app.set("view engine","ejs");
-app.use(express.static('public'));
-app.use(methodOverride("_method"));
-app.use(cors({origin: ["http://localhost:3000","http://localhost:3000/add"],methods: ["POST", "GET"] ,credentials: true}))
+app.use(cors({origin: ["http://localhost:3000","https://yelp-camps-server-8c727j5v8-hamadullah16.vercel.app"],methods: ["POST", "GET"] ,credentials: true}))
 app.use(express.json())
 
 app.use(express.urlencoded({extended: false}))
