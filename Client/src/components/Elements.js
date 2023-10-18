@@ -7,7 +7,7 @@ function Elements({ server }) {
     const [data, setData] = useState([])
     const [spinner, setSpinner] = useState(true)
     async function fetchAPI() {
-        await fetch(`${server}`).then(response => response.json()).then((data) =>
+        await fetch(`https://yelp-camps-mern-app-server.vercel.app`).then(response => response.json()).then((data) =>
             setData(data)
         ).catch(e => console.log(`${e} FetchAPI Error`))
         setSpinner(false)
@@ -49,7 +49,8 @@ function Elements({ server }) {
                 <button className='btn btn-dark my-3' type='button'>Add</button>
             </Link>
             <button onClick={deleteHandler} className='btn btn-danger my-3 mx-2'>Delete All</button>
-            <div className="row mb-5 pb -5">
+            <hr></hr>
+            <div className="row mainElements mb-5 pb-5">
                 {spinner ? <FontAwesomeIcon icon={faSpinner} spinPulse /> : renderCards}
             </div>
         </section>

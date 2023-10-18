@@ -36,6 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
 .cardSize{
   width: 18rem;
 }
@@ -55,6 +56,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed;
+  bottom: 0;
+  z-index: 0;
 }
 .main{
   position: relative;
@@ -65,4 +69,10 @@
 }
 .spinnerDiv{
   min-height: 50vh;
+}
+.mainElements{
+  z-index: 1;
+}
+.logo{
+  max-width: 50px;
 }
