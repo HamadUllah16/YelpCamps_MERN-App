@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
-function EditForm({api}) {
+function EditForm() {
+  const navigate = useNavigate()
   const { id } = useParams()
-  const [data, setData] = useState([])
-  useEffect(() => {
-    fetch(`${api}edit/${id}`).then((response) => response.json()).then((item) => setData(item)).catch(e => console.log(e, 'Error in fetching Edit Data'))
+  const [data, setData] = useState({
+    name: '',
+    image: '',
+    description: ''
   })
-
+  function FetchEditData(){
+    fetch(`https://yelp-camps-mern-app-server.vercel.app/edit/${id}`).then((response) => response.json()).then((item) => setData(item)).catch(e => console.log(e, 'Error in fetching Edit Data'))
+  }
+  useEffect(() => {
+    FetchEditData()
+  },[])
   async function submitHandler(e) {
+    e.preventDefault()
     try {
-      const response = await fetch(`${api}edit/${id}`, {
+      const response = await fetch(`https://yelp-camps-mern-app-server.vercel.app/edit/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -20,6 +28,7 @@ function EditForm({api}) {
       if (response.ok) {
         const responseData = await response.json();
         console.log('Response from backend', responseData)
+        navigate("/")
       }
       else {
         console.log('Error', response.statusText)
@@ -36,7 +45,7 @@ function EditForm({api}) {
           <div className="mb-3">
             <label htmlFor="name" className="form-label">Name</label>
             <input value={data.name} onChange={(e) => {
-              setData({ ...data, name: e.target.value })
+              setData(prevData=>({...prevData, name: e.target.value}))
             }}
               type="text" className="form-control" name='name' id="name" />
           </div>

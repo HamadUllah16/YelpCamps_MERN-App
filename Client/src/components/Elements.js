@@ -7,7 +7,7 @@ function Elements({ server }) {
     const [data, setData] = useState([])
     const [spinner, setSpinner] = useState(true)
     async function fetchAPI() {
-        await fetch(`https://yelp-camps-mern-app-server.vercel.app`).then(response => response.json()).then((data) =>
+        await fetch(server).then(response => response.json()).then((data) =>
             setData(data)
         ).catch(e => console.log(`${e} FetchAPI Error`))
         setSpinner(false)
@@ -15,7 +15,7 @@ function Elements({ server }) {
     useEffect(() => {
         fetchAPI()
     })
-    const renderCards = data.map((item,index) => {
+    const renderCards = data.map((item, index) => {
         return (
             <div key={index} className="col-2 m-2 card cardSize p-0">
                 <img src={item.image} className="img-fluid cardImage rounded" alt="..." />

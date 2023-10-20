@@ -3,11 +3,11 @@ import EditForm from '../components/EditForm'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
 
-function Edit() {
+function Edit(server) {
     return (
         <>
             <Nav />
-            <EditForm />
+            <EditForm server={server} />
             <Footer />
         </>
     )
