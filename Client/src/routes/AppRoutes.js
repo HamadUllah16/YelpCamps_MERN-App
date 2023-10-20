@@ -11,7 +11,7 @@ function AppRoutes() {
         <Routes>
             <Route path='/' element={<Home server={server} />} />
             <Route path='/add' element={<Add server={server} />} />
-            <Route path='/edit/:id' element={<Edit server={server} />}/>
+            <Route path='/edit/:id' element={<Edit />}/>
         </Routes>
     </div>
   )

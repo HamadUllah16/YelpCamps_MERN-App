@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
 function EditForm() {
-  const navigate = useNavigate()
   const { id } = useParams()
   const [data, setData] = useState({
     name: '',
@@ -16,7 +15,7 @@ function EditForm() {
     FetchEditData()
   },[])
   async function submitHandler(e) {
-    e.preventDefault()
+    e.preventDefault();
     try {
       const response = await fetch(`https://yelp-camps-mern-app-server.vercel.app/edit/${id}`, {
         method: 'PUT',
@@ -28,7 +27,6 @@ function EditForm() {
       if (response.ok) {
         const responseData = await response.json();
         console.log('Response from backend', responseData)
-        navigate("/")
       }
       else {
         console.log('Error', response.statusText)
@@ -41,7 +39,7 @@ function EditForm() {
   return (
     <>
       <div className='m-5 form bg-dark text-light rounded'>
-        <form className='p-3' action='/' onSubmit={submitHandler} >
+        <form className='p-3' onSubmit={submitHandler} >
           <div className="mb-3">
             <label htmlFor="name" className="form-label">Name</label>
             <input value={data.name} onChange={(e) => {
