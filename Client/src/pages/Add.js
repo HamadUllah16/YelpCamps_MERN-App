@@ -1,15 +1,11 @@
 import React from 'react'
-import Nav from '../components/Nav'
 import AddForm from '../components/AddForm'
-import Footer from '../components/Footer'
 
 function Add({server}) {
     return (
-        <>
-            <Nav />
+        <div className='row justify-content-center'>
             <AddForm server={server} />
-            <Footer />
-        </>
+        </div>
     )
 }
 
